@@ -24,12 +24,6 @@ class ModuleProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../resources/lang' => base_path('resources/lang/vendor/webed-settings'),
         ], 'lang');
-        $this->publishes([
-            __DIR__ . '/../../config' => base_path('config'),
-        ], 'config');
-        $this->publishes([
-            __DIR__ . '/../../database' => base_path('database'),
-        ], 'migrations');
     }
 
     /**
