@@ -17,8 +17,6 @@ class SettingController extends BaseAdminController
     {
         parent::__construct();
 
-        $this->middleware('has-permission:view-settings');
-
         $this->repository = $settingRepository;
 
         $this->breadcrumbs->addLink('Settings', route('admin::settings.index.get'));
@@ -47,8 +45,6 @@ class SettingController extends BaseAdminController
      */
     public function store()
     {
-        $this->middleware('has-permission:edit-settings');
-
         $data = $this->request->except([
             '_token',
             '_tab',

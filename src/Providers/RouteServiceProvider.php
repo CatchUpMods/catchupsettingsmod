@@ -21,8 +21,13 @@ class RouteServiceProvider extends ServiceProvider
             $router->group(['prefix' => $adminRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
 
                 $router->group(['prefix' => $moduleRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
-                    $router->get('/', 'SettingController@index')->name('admin::settings.index.get');
-                    $router->post('', 'SettingController@store')->name('admin::settings.update.post');
+                    $router->get('/', 'SettingController@index')
+                        ->name('admin::settings.index.get')
+                        ->middleware('has-permission:view-settings');
+
+                    $router->post('', 'SettingController@store')
+                        ->name('admin::settings.update.post')
+                        ->middleware('has-permission:edit-settings');
                 });
 
             });
