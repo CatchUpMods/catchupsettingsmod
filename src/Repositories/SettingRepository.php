@@ -80,7 +80,7 @@ class SettingRepository extends AbstractBaseRepository implements SettingContrac
         $setting = $this
             ->where(['option_key' => $key])
             ->select(['id', 'option_key', 'option_value'])
-            ->first();;
+            ->first();
 
         if ($setting) {
             $allowCreateNew = false;
