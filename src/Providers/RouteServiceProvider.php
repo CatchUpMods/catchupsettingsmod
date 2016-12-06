@@ -9,29 +9,7 @@ class RouteServiceProvider extends ServiceProvider
 
     public function map(Router $router)
     {
-        $router->group(['namespace' => $this->namespace, 'middleware' => ['web']], function (Router $router) {
-
-            $adminRoute = config('webed.admin_route');
-
-            $moduleRoute = 'settings';
-
-            /*
-             * Admin route
-             * */
-            $router->group(['prefix' => $adminRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
-
-                $router->group(['prefix' => $moduleRoute], function (Router $router) use ($adminRoute, $moduleRoute) {
-                    $router->get('/', 'SettingController@index')
-                        ->name('admin::settings.index.get')
-                        ->middleware('has-permission:view-settings');
-
-                    $router->post('', 'SettingController@store')
-                        ->name('admin::settings.update.post')
-                        ->middleware('has-permission:edit-settings');
-                });
-
-            });
-
-        });
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
     }
 }
