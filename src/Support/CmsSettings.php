@@ -133,7 +133,7 @@ class CmsSettings
      */
     public function getSetting($key = null, $default = null)
     {
-        if($this->settings === null) {
+        if ($this->settings === null) {
             $this->settings = $this->getSettingFromDB();
         }
 
@@ -141,6 +141,10 @@ class CmsSettings
             return $this->settings;
         }
 
-        return array_get($this->settings, $key, (string)$default);
+        if (isset($this->settings[$key]) && $this->settings[$key]) {
+            return $this->settings[$key];
+        }
+
+        return $default;
     }
 }
