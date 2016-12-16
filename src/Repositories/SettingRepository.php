@@ -59,7 +59,7 @@ class SettingRepository extends AbstractBaseRepository implements SettingContrac
                 return $result;
             }
         }
-        return $this->setMessages('Settings updated', false, $this::SUCCESS_NO_CONTENT_CODE);
+        return $this->setMessages('Settings updated', false, \Constants::SUCCESS_NO_CONTENT_CODE);
     }
 
     /**
@@ -93,12 +93,12 @@ class SettingRepository extends AbstractBaseRepository implements SettingContrac
         ], $allowCreateNew, $justUpdateSomeFields);
 
         if ($result['error']) {
-            return $this->setMessages($result['messages'], true, $this::ERROR_CODE, [
+            return $this->setMessages($result['messages'], true, \Constants::ERROR_CODE, [
                 'key' => $key,
                 'value' => $value
             ]);
         }
 
-        return $this->setMessages('Settings updated', false, $this::SUCCESS_NO_CONTENT_CODE);
+        return $this->setMessages('Settings updated', false, \Constants::SUCCESS_NO_CONTENT_CODE);
     }
 }
