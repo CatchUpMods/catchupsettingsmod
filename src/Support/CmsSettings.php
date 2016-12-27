@@ -11,12 +11,12 @@ class CmsSettings
     private $groups = [
         'basic' => [
             'title' => 'Basic',
-            'piority' => 1,
+            'priority' => 1,
             'items' => [],
         ],
         'advanced' => [
             'title' => 'Advanced',
-            'piority' => 2,
+            'priority' => 2,
             'items' => [],
         ],
     ];
@@ -47,12 +47,12 @@ class CmsSettings
      * @param string $groupTitle
      * @return $this
      */
-    public function addGroup($groupKey, $groupTitle, $piority = 999)
+    public function addGroup($groupKey, $groupTitle, $priority = 999)
     {
         if (!isset($this->groups[$groupKey])) {
             $this->groups[$groupKey] = [
                 'title' => $groupTitle,
-                'piority' => $piority,
+                'priority' => $priority,
                 'items' => [],
             ];
         }
@@ -91,7 +91,7 @@ class CmsSettings
         $options = array_merge([
             'group' => 'basic',
             'type' => null,
-            'piority' => 999,
+            'priority' => 999,
             'label' => null,
             'helper' => null,
         ], $options);
@@ -103,7 +103,7 @@ class CmsSettings
         $this->groups[$options['group']]['items'][] = [
             'name' => $name,
             'type' => $options['type'],
-            'piority' => $options['piority'],
+            'priority' => $options['priority'],
             'params' => $htmlHelpersParams,
             'label' => array_get($options, 'label'),
             'helper' => array_get($options, 'helper'),
@@ -117,10 +117,10 @@ class CmsSettings
      */
     public function export()
     {
-        $settingGroup = collect($this->groups)->sortBy('piority')->toArray();
+        $settingGroup = collect($this->groups)->sortBy('priority')->toArray();
 
         foreach ($settingGroup as $key => $group) {
-            $settingGroup[$key]['items'] = collect($group['items'])->sortBy('piority')->toArray();
+            $settingGroup[$key]['items'] = collect($group['items'])->sortBy('priority')->toArray();
         }
 
         return collect($settingGroup);

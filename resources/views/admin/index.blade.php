@@ -27,7 +27,6 @@
                         </a>
                     </li>
                 @endforeach
-                @php do_action('meta_boxes', 'bottom-sidebar', 'webed-settings.index') @endphp
             </ul>
         </div>
         <div class="column main">
