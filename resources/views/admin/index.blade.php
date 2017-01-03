@@ -20,7 +20,7 @@
                 @foreach(cms_settings()->export() as $key => $row)
                     <li class="list-group-item
                         {{ (!Request::exists('_tab') && $loop->first === true) || Request::get('_tab') === $key ? 'active' : '' }}"
-                        data-piority="{{ $row['piority'] or '' }}"
+                        data-priority="{{ $row['priority'] or '' }}"
                         role="presentation">
                         <a href="{{ Request::url() }}?_tab={{ $key }}">
                             {{ $row['title'] }}
@@ -45,7 +45,7 @@
                             </div>
                             <div class="box-body">
                                 @foreach($group['items'] as $setting)
-                                    <div class="form-group" data-piority="{{ $setting['piority'] or '' }}">
+                                    <div class="form-group" data-priority="{{ $setting['priority'] or '' }}">
                                         <label class="control-label block">{{ $setting['label'] or '' }}</label>
                                         {!! call_user_func_array([form(), $setting['type']], call_user_func($setting['params'])) !!}
                                         <span class="help-block">{{ $setting['helper'] or '' }}</span>
