@@ -42,6 +42,7 @@ class BootstrapModuleServiceProvider extends ServiceProvider
             'font_icon' => 'fa fa-circle-o',
             'link' => route('admin::settings.index.get'),
             'css_class' => null,
+            'permissions' => ['view-settings'],
         ]);
     }
 }
