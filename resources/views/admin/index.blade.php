@@ -48,7 +48,7 @@
                                     <div class="form-group" data-priority="{{ $setting['priority'] or '' }}">
                                         <label class="control-label block">{{ $setting['label'] or '' }}</label>
                                         {!! call_user_func_array([form(), $setting['type']], call_user_func($setting['params'])) !!}
-                                        <span class="help-block">{{ $setting['helper'] or '' }}</span>
+                                        <span class="help-block">{!! $setting['helper'] or '' !!}</span>
                                     </div>
                                 @endforeach
                             </div>
