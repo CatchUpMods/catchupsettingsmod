@@ -1,11 +1,14 @@
 <?php namespace WebEd\Base\Settings\Repositories;
 
-use WebEd\Base\Core\Repositories\AbstractBaseRepository;
+use WebEd\Base\Caching\Services\Traits\Cacheable;
+use WebEd\Base\Core\Repositories\Eloquent\EloquentBaseRepository;
 use WebEd\Base\Caching\Services\Contracts\CacheableContract;
 use WebEd\Base\Settings\Repositories\Contracts\SettingContract;
 
-class SettingRepository extends AbstractBaseRepository implements SettingContract, CacheableContract
+class SettingRepository extends EloquentBaseRepository implements SettingContract, CacheableContract
 {
+    use Cacheable;
+
     protected $rules = [
         'option_key' => 'required|unique:settings|string|max:100',
         'option_value' => 'string'
@@ -22,7 +25,7 @@ class SettingRepository extends AbstractBaseRepository implements SettingContrac
     public function getAllSettings()
     {
         $result = [];
-        $settings = $this->select('id', 'option_key', 'option_value')->all();
+        $settings = $this->get(['option_key', 'option_value']);
 
         foreach ($settings as $key => $row) {
             $result[$row->option_key] = $row->option_value;
@@ -59,7 +62,7 @@ class SettingRepository extends AbstractBaseRepository implements SettingContrac
                 return $result;
             }
         }
-        return $this->setMessages('Settings updated', false, \Constants::SUCCESS_NO_CONTENT_CODE);
+        return response_with_messages('Settings updated', false, \Constants::SUCCESS_NO_CONTENT_CODE);
     }
 
     /**
@@ -93,12 +96,12 @@ class SettingRepository extends AbstractBaseRepository implements SettingContrac
         ], $allowCreateNew, $justUpdateSomeFields);
 
         if ($result['error']) {
-            return $this->setMessages($result['messages'], true, \Constants::ERROR_CODE, [
+            return response_with_messages($result['messages'], true, \Constants::ERROR_CODE, [
                 'key' => $key,
                 'value' => $value
             ]);
         }
 
-        return $this->setMessages('Settings updated', false, \Constants::SUCCESS_NO_CONTENT_CODE);
+        return response_with_messages('Settings updated', false, \Constants::SUCCESS_NO_CONTENT_CODE);
     }
 }

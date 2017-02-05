@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Collection;
 use WebEd\Base\Settings\Repositories\Contracts\SettingContract;
+use WebEd\Base\Settings\Repositories\SettingRepository;
 
 class CmsSettings
 {
@@ -24,7 +25,7 @@ class CmsSettings
     /**
      * @var array
      */
-    private $settings;
+    protected $settings;
 
     public function __construct()
     {
@@ -36,7 +37,11 @@ class CmsSettings
      */
     public function getSettingFromDB()
     {
+        /**
+         * @var SettingRepository $setting
+         */
         $setting = app(SettingContract::class);
+
         $this->settings = $setting->getAllSettings();
 
         return $this->settings;
