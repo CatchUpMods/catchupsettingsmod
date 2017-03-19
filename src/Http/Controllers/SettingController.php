@@ -1,6 +1,6 @@
 <?php namespace WebEd\Base\Settings\Http\Controllers;
 
-use WebEd\Base\Core\Http\Controllers\BaseAdminController;
+use WebEd\Base\Http\Controllers\BaseAdminController;
 
 use WebEd\Base\Settings\Repositories\Contracts\SettingContract;
 
@@ -59,7 +59,7 @@ class SettingController extends BaseAdminController
 
         $msgType = $result['error'] ? 'danger' : 'success';
 
-        $this->flashMessagesHelper
+        flash_messages()
             ->addMessages($result['messages'], $msgType)
             ->showMessagesOnSession();
 

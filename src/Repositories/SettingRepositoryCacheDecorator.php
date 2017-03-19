@@ -1,6 +1,6 @@
 <?php namespace WebEd\Base\Settings\Repositories;
 
-use WebEd\Base\Caching\Repositories\Eloquent\EloquentBaseRepositoryCacheDecorator;
+use WebEd\Base\Repositories\Eloquent\EloquentBaseRepositoryCacheDecorator;
 use WebEd\Base\Settings\Repositories\Contracts\SettingContract;
 
 class SettingRepositoryCacheDecorator extends EloquentBaseRepositoryCacheDecorator implements SettingContract

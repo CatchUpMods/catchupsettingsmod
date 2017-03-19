@@ -1,6 +1,6 @@
 <?php namespace WebEd\Base\Settings\Models;
 
-use WebEd\Base\Core\Models\EloquentBase as BaseModel;
+use WebEd\Base\Models\EloquentBase as BaseModel;
 
 class EloquentSetting extends BaseModel
 {
