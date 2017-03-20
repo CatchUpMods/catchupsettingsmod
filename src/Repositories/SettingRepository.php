@@ -40,7 +40,7 @@ class SettingRepository extends EloquentBaseRepository implements SettingContrac
      */
     public function getSetting($settingKey)
     {
-        $setting = $this
+        $setting = $this->model
             ->where(['option_key' => $settingKey])
             ->select(['id', 'option_key', 'option_value'])
             ->first();
@@ -80,7 +80,7 @@ class SettingRepository extends EloquentBaseRepository implements SettingContrac
          */
         $value = (string)$value;
 
-        $setting = $this
+        $setting = $this->model
             ->where(['option_key' => $key])
             ->select(['id', 'option_key', 'option_value'])
             ->first();
