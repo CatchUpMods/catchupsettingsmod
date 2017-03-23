@@ -4,7 +4,7 @@ use Illuminate\Support\ServiceProvider;
 
 class InstallModuleServiceProvider extends ServiceProvider
 {
-    protected $module = 'WebEd\Base\Settings';
+    protected $module = 'webed-settings';
 
     /**
      * Bootstrap the application services.
