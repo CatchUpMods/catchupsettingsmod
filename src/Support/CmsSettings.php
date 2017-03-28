@@ -9,18 +9,7 @@ class CmsSettings
     /**
      * @var array
      */
-    private $groups = [
-        'basic' => [
-            'title' => 'Basic',
-            'priority' => 1,
-            'items' => [],
-        ],
-        'advanced' => [
-            'title' => 'Advanced',
-            'priority' => 2,
-            'items' => [],
-        ],
-    ];
+    protected $groups = [];
 
     /**
      * @var array
@@ -29,7 +18,18 @@ class CmsSettings
 
     public function __construct()
     {
-
+        $this->groups = [
+            'basic' => [
+                'title' => trans('webed-core::base.setting_group.basic'),
+                'priority' => 1,
+                'items' => [],
+            ],
+            'advanced' => [
+                'title' => trans('webed-core::base.setting_group.advanced'),
+                'priority' => 2,
+                'items' => [],
+            ],
+        ];
     }
 
     /**

@@ -19,13 +19,7 @@ class SettingController extends BaseAdminController
 
         $this->repository = $settingRepository;
 
-        $this->breadcrumbs->addLink('Settings', route('admin::settings.index.get'));
-
-        $this->getDashboardMenu($this->module);
-
-        $this->assets
-            ->addStylesheets('bootstrap-tagsinput')
-            ->addJavascripts('bootstrap-tagsinput');
+        $this->breadcrumbs->addLink(trans('webed-settings::base.settings'), route('admin::settings.index.get'));
     }
 
     /**
@@ -33,9 +27,15 @@ class SettingController extends BaseAdminController
      */
     public function index()
     {
-        $this->setPageTitle('Settings');
+        $this->setPageTitle(trans('webed-settings::base.settings'));
 
-        return do_filter('settings.index.get', $this)->viewAdmin('index');
+        $this->getDashboardMenu($this->module);
+
+        $this->assets
+            ->addStylesheets('bootstrap-tagsinput')
+            ->addJavascripts('bootstrap-tagsinput');
+
+        return do_filter(BASE_FILTER_CONTROLLER, $this, WEBED_SETTINGS, 'index.get')->viewAdmin('index');
     }
 
     /**
@@ -50,20 +50,17 @@ class SettingController extends BaseAdminController
             '_tab',
         ]);
 
-        /**
-         * Filter
-         */
-        $data = do_filter('settings.before-edit.post', $data, $this);
+        $data = do_filter(BASE_FILTER_BEFORE_UPDATE, $data, WEBED_SETTINGS, 'edit.post');
 
         $result = $this->repository->updateSettings($data);
+
+        do_action(BASE_ACTION_AFTER_UPDATE, WEBED_SETTINGS, $data, $result);
 
         $msgType = $result['error'] ? 'danger' : 'success';
 
         flash_messages()
             ->addMessages($result['messages'], $msgType)
             ->showMessagesOnSession();
-
-        do_action('settings.after-edit.post', $result, $this);
 
         return redirect()->back();
     }
