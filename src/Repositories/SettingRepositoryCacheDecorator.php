@@ -34,7 +34,7 @@ class SettingRepositoryCacheDecorator extends EloquentBaseRepositoryCacheDecorat
     /**
      * @param $key
      * @param $value
-     * @return bool
+     * @return int|null
      */
     public function updateSetting($key, $value)
     {

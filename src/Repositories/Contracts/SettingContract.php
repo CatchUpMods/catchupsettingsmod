@@ -3,30 +3,26 @@
 interface SettingContract
 {
     /**
-     * Get all settings
-     * @return mixed
+     * @return array
      */
     public function getAllSettings();
 
     /**
-     * Get setting by key
      * @param $settingKey
      * @return mixed
      */
     public function getSetting($settingKey);
 
     /**
-     * Update all settings
      * @param array $settings
-     * @return mixed
+     * @return bool
      */
     public function updateSettings($settings = []);
 
     /**
-     * Update each setting
      * @param $key
      * @param $value
-     * @return mixed
+     * @return int|null
      */
     public function updateSetting($key, $value);
 }

@@ -19,7 +19,11 @@ class SettingController extends BaseAdminController
 
         $this->repository = $settingRepository;
 
-        $this->breadcrumbs->addLink(trans('webed-settings::base.settings'), route('admin::settings.index.get'));
+        $this->middleware(function ($request, $next) {
+            $this->breadcrumbs->addLink(trans('webed-settings::base.settings'), route('admin::settings.index.get'));
+
+            return $next($request);
+        });
     }
 
     /**
@@ -56,10 +60,11 @@ class SettingController extends BaseAdminController
 
         do_action(BASE_ACTION_AFTER_UPDATE, WEBED_SETTINGS, $data, $result);
 
-        $msgType = $result['error'] ? 'danger' : 'success';
+        $msgType = !$result ? 'danger' : 'success';
+        $msg = $result ? trans('webed-core::base.form.request_completed') : trans('webed-core::base.form.error_occurred');
 
         flash_messages()
-            ->addMessages($result['messages'], $msgType)
+            ->addMessages($msg, $msgType)
             ->showMessagesOnSession();
 
         return redirect()->back();

@@ -9,29 +9,14 @@ class SettingRepository extends EloquentBaseRepository implements SettingContrac
 {
     use Cacheable;
 
-    protected $rules = [
-        'option_key' => 'required|unique:settings|string|max:100',
-        'option_value' => 'string'
-    ];
-
-    protected $editableFields = [
-        'option_key',
-        'option_value',
-    ];
-
     /**
      * @return array
      */
     public function getAllSettings()
     {
-        $result = [];
-        $settings = $this->get(['option_key', 'option_value']);
+        $settings = $this->model->get(['option_key', 'option_value']);
 
-        foreach ($settings as $key => $row) {
-            $result[$row->option_key] = $row->option_value;
-        }
-
-        return $result;
+        return $settings->pluck('option_value', 'option_key')->toArray();
     }
 
     /**
@@ -52,29 +37,26 @@ class SettingRepository extends EloquentBaseRepository implements SettingContrac
 
     /**
      * @param array $settings
-     * @return array|bool
+     * @return bool
      */
     public function updateSettings($settings = [])
     {
         foreach ($settings as $key => $row) {
             $result = $this->updateSetting($key, $row);
-            if ($result['error']) {
+            if (!$result) {
                 return $result;
             }
         }
-        return response_with_messages('Settings updated', false, \Constants::SUCCESS_NO_CONTENT_CODE);
+        return true;
     }
 
     /**
      * @param $key
      * @param $value
-     * @return array
+     * @return int|null
      */
     public function updateSetting($key, $value)
     {
-        $allowCreateNew = true;
-        $justUpdateSomeFields = false;
-
         /**
          * Parse everything to string
          */
@@ -85,23 +67,11 @@ class SettingRepository extends EloquentBaseRepository implements SettingContrac
             ->select(['id', 'option_key', 'option_value'])
             ->first();
 
-        if ($setting) {
-            $allowCreateNew = false;
-            $justUpdateSomeFields = true;
-        }
-
-        $result = $this->editWithValidate($setting, [
+        $result = $this->createOrUpdate($setting, [
             'option_key' => $key,
             'option_value' => $value
-        ], $allowCreateNew, $justUpdateSomeFields);
+        ]);
 
-        if ($result['error']) {
-            return response_with_messages($result['messages'], true, \Constants::ERROR_CODE, [
-                'key' => $key,
-                'value' => $value
-            ]);
-        }
-
-        return response_with_messages('Settings updated', false, \Constants::SUCCESS_NO_CONTENT_CODE);
+        return $result;
     }
 }
