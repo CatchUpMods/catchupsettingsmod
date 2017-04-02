@@ -16,7 +16,7 @@
     <div class="layout-2columns sidebar-left">
         <div class="column left">
             <ul class="list-group">
-                @php do_action(BASE_ACTION_META_BOXES, 'top-sidebar', 'webed-settings.index') @endphp
+                @php do_action(BASE_ACTION_META_BOXES, 'top-sidebar', WEBED_SETTINGS . '.index', null) @endphp
                 @foreach(cms_settings()->export() as $key => $row)
                     <li class="list-group-item
                         {{ (!Request::exists('_tab') && $loop->first === true) || Request::get('_tab') === $key ? 'active' : '' }}"
@@ -53,7 +53,7 @@
                                 @endforeach
                             </div>
                             <div class="box-footer">
-                                {!! Form::button('Save change', [
+                                {!! Form::button(trans('webed-core::base.form.save_change'), [
                                     'class' => 'btn green pull-right',
                                     'type' => 'submit',
                                 ]) !!}
@@ -63,7 +63,7 @@
                     </div>
                     @endif
                 @endforeach
-                @php do_action(BASE_ACTION_META_BOXES, 'main', 'webed-settings.index') @endphp
+                @php do_action(BASE_ACTION_META_BOXES, 'main', WEBED_SETTINGS . '.index', null) @endphp
             </div>
         </div>
     </div>
