@@ -1,14 +1,10 @@
 <?php namespace WebEd\Base\Settings\Repositories;
 
-use WebEd\Base\Caching\Services\Traits\Cacheable;
 use WebEd\Base\Repositories\Eloquent\EloquentBaseRepository;
-use WebEd\Base\Caching\Services\Contracts\CacheableContract;
 use WebEd\Base\Settings\Repositories\Contracts\SettingContract;
 
-class SettingRepository extends EloquentBaseRepository implements SettingContract, CacheableContract
+class SettingRepository extends EloquentBaseRepository implements SettingContract
 {
-    use Cacheable;
-
     /**
      * @return array
      */
