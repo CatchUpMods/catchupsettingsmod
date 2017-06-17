@@ -20,7 +20,7 @@ class SettingController extends BaseAdminController
         $this->repository = $settingRepository;
 
         $this->middleware(function ($request, $next) {
-            $this->breadcrumbs->addLink(trans('webed-settings::base.settings'), route('admin::settings.index.get'));
+            $this->breadcrumbs->addLink(trans($this->module . '::base.settings'), route('admin::settings.index.get'));
 
             return $next($request);
         });
@@ -31,7 +31,7 @@ class SettingController extends BaseAdminController
      */
     public function index()
     {
-        $this->setPageTitle(trans('webed-settings::base.settings'));
+        $this->setPageTitle(trans($this->module . '::base.settings'));
 
         $this->getDashboardMenu($this->module);
 
