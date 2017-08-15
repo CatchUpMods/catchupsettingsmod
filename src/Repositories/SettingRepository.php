@@ -1,9 +1,9 @@
 <?php namespace WebEd\Base\Settings\Repositories;
 
 use WebEd\Base\Repositories\Eloquent\EloquentBaseRepository;
-use WebEd\Base\Settings\Repositories\Contracts\SettingContract;
+use WebEd\Base\Settings\Repositories\Contracts\SettingRepositoryContract;
 
-class SettingRepository extends EloquentBaseRepository implements SettingContract
+class SettingRepository extends EloquentBaseRepository implements SettingRepositoryContract
 {
     /**
      * @return array

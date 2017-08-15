@@ -19,10 +19,10 @@
                 @php do_action(BASE_ACTION_META_BOXES, 'top-sidebar', WEBED_SETTINGS . '.index', null) @endphp
                 @foreach(cms_settings()->export() as $key => $row)
                     <li class="list-group-item
-                        {{ (!Request::exists('_tab') && $loop->first === true) || Request::get('_tab') === $key ? 'active' : '' }}"
+                        {{ (!request()->exists('_tab') && $loop->first === true) || request()->get('_tab') === $key ? 'active' : '' }}"
                         data-priority="{{ $row['priority'] or '' }}"
                         role="presentation">
-                        <a href="{{ Request::url() }}?_tab={{ $key }}">
+                        <a href="{{ request()->url() }}?_tab={{ $key }}">
                             {{ $row['title'] }}
                         </a>
                     </li>
@@ -32,10 +32,10 @@
         <div class="column main">
             <div class="tab-content">
                 @foreach(cms_settings()->export() as $key => $group)
-                    @if((!Request::exists('_tab') && $loop->first === true) || Request::get('_tab') === $key)
+                    @if((!request()->exists('_tab') && $loop->first === true) || request()->get('_tab') === $key)
                     <div class="tab-pane active">
-                        {!! Form::open(['class' => 'js-validate-form']) !!}
-                        {!! Form::hidden('_tab', $key) !!}
+                        {!! form()->open(['class' => 'js-validate-form']) !!}
+                        {!! form()->hidden('_tab', $key) !!}
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <h3 class="box-title">
@@ -53,13 +53,13 @@
                                 @endforeach
                             </div>
                             <div class="box-footer">
-                                {!! Form::button(trans('webed-core::base.form.save_change'), [
+                                {!! form()->button(trans('webed-core::base.form.save_change'), [
                                     'class' => 'btn green pull-right',
                                     'type' => 'submit',
                                 ]) !!}
                             </div>
                         </div>
-                        {!! Form::close() !!}
+                        {!! form()->close() !!}
                     </div>
                     @endif
                 @endforeach

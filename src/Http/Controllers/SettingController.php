@@ -2,18 +2,18 @@
 
 use WebEd\Base\Http\Controllers\BaseAdminController;
 
-use WebEd\Base\Settings\Repositories\Contracts\SettingContract;
+use WebEd\Base\Settings\Repositories\Contracts\SettingRepositoryContract;
 
 class SettingController extends BaseAdminController
 {
-    protected $module = 'webed-settings';
+    protected $module = WEBED_SETTINGS;
 
     /**
      * @var \WebEd\Base\Settings\Repositories\SettingRepository
      */
     protected $repository;
 
-    public function __construct(SettingContract $settingRepository)
+    public function __construct(SettingRepositoryContract $settingRepository)
     {
         parent::__construct();
 

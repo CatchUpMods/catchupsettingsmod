@@ -1,7 +1,7 @@
 <?php namespace WebEd\Base\Settings\Support;
 
 use Illuminate\Support\Collection;
-use WebEd\Base\Settings\Repositories\Contracts\SettingContract;
+use WebEd\Base\Settings\Repositories\Contracts\SettingRepositoryContract;
 use WebEd\Base\Settings\Repositories\SettingRepository;
 
 class CmsSettings
@@ -40,7 +40,7 @@ class CmsSettings
         /**
          * @var SettingRepository $setting
          */
-        $setting = app(SettingContract::class);
+        $setting = app(SettingRepositoryContract::class);
 
         $this->settings = $setting->getAllSettings();
 

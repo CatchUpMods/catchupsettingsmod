@@ -1,6 +1,6 @@
 <?php namespace WebEd\Base\Settings\Repositories\Contracts;
 
-interface SettingContract
+interface SettingRepositoryContract
 {
     /**
      * @return array

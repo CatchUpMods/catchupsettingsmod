@@ -3,7 +3,7 @@
 use Illuminate\Support\ServiceProvider;
 use WebEd\Base\Settings\Models\Setting;
 use WebEd\Base\Settings\Repositories\SettingRepository;
-use WebEd\Base\Settings\Repositories\Contracts\SettingContract;
+use WebEd\Base\Settings\Repositories\Contracts\SettingRepositoryContract;
 use WebEd\Base\Settings\Repositories\SettingRepositoryCacheDecorator;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -15,7 +15,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(SettingContract::class, function () {
+        $this->app->bind(SettingRepositoryContract::class, function () {
             $repository = new SettingRepository(new Setting);
 
             if (config('webed-caching.repository.enabled')) {
