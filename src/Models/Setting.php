@@ -5,7 +5,7 @@ use WebEd\Base\Settings\Models\Contracts\SettingModelContract;
 
 class Setting extends BaseModel implements SettingModelContract
 {
-    protected $table = 'we_settings';
+    protected $table = 'settings';
 
     protected $primaryKey = 'id';
 
